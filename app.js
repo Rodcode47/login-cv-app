@@ -10,9 +10,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var url = 'mongodb://rodcode:0987654321@ds143744.mlab.com:43744/heroku_v24dzxq0';
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
-mongoose.connect('url');
+var mongodbUri = 'mongodb://rodcode:0987654321@ds143744.mlab.com:43744/heroku_v24dzxq0';
+
+mongoose.connect(mongodbUri, options);
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
